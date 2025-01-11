@@ -240,8 +240,8 @@ class ProjectAgent:
 
     def load(self, path: str = "dqn_model_final.pth"):
         path = os.path.join(os.path.dirname(__file__), path)
-        self.model.load_state_dict(torch.load(path))
-        self.target_model.load_state_dict(torch.load(path))
+        self.model.load_state_dict(torch.load(path, map_location=self.device))
+        self.target_model.load_state_dict(torch.load(path, map_location=self.device))
 
     def act(self, observation, use_random=False) -> int:
         state_tensor = torch.FloatTensor(observation).to(self.device)
