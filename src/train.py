@@ -12,7 +12,7 @@ try:
 except ImportError:
     pass
 from torch import nn
-import random
+import random, os
 from copy import deepcopy
 from torch.optim.lr_scheduler import StepLR
 import numpy as np
@@ -239,6 +239,7 @@ class ProjectAgent:
         print(f"Model saved at {path}")
 
     def load(self, path: str = "dqn_model_final.pth"):
+        path = os.path.join(os.path.dirname(__file__), path)
         self.model.load_state_dict(torch.load(path))
         self.target_model.load_state_dict(torch.load(path))
 
